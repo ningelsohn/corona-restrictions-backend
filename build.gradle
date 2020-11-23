@@ -27,7 +27,6 @@ dependencies {
 		exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
 	}
 	testImplementation 'org.junit.platform:junit-platform-console-standalone:1.6.0'
-	
 
 }
 

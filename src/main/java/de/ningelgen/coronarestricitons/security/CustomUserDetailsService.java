@@ -2,6 +2,8 @@ package de.ningelgen.coronarestricitons.security;
 
 import java.util.ArrayList;
 
+import javax.transaction.Transactional;
+
 import org.springframework.beans.factory.annotation.Autowired;
 // import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,6 +31,7 @@ public class CustomUserDetailsService implements UserDetailsService {
     PasswordEncoder pwenc;
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String loginname) throws UsernameNotFoundException {
         AreaAdminUser user = adminUserDAO.findByLoginname(loginname);
 
@@ -43,4 +46,12 @@ public class CustomUserDetailsService implements UserDetailsService {
         .build();
     }
     
+    @Transactional
+    public UserDetails loadUserById(Long id) throws Exception {
+        AreaAdminUser areaUser = adminUserDAO.findById(id).orElseThrow(
+            () ->  new Exception("Resouce not Found") // new ResourceNotFoundException("User", "id", "id")
+        );
+
+        return AreaAdminUserPrincipal.create(areaUser);
+    }
 }
