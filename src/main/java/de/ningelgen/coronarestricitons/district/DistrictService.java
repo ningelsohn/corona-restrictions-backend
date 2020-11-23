@@ -1,4 +1,4 @@
-package de.ningelgen.coronarestricitons.area;
+package de.ningelgen.coronarestricitons.district;
 
 public interface DistrictService {
 

@@ -12,6 +12,7 @@ import javax.persistence.Version;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import de.ningelgen.coronarestricitons.district.District;
 import de.ningelgen.coronarestricitons.user.AreaAdminUser;
 
 @Entity

@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import de.ningelgen.coronarestricitons.area.AdministrativeArea;
-import de.ningelgen.coronarestricitons.area.District;
+import de.ningelgen.coronarestricitons.district.District;
 
 @Service
 public class RestrictionServiceImpl implements RestrictionService {

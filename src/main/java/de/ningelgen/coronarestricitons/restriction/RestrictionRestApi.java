@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import de.ningelgen.coronarestricitons.area.AdministrativeAreaService;
-import de.ningelgen.coronarestricitons.area.DistrictService;
+import de.ningelgen.coronarestricitons.district.DistrictService;
 
 @RestController
 @RequestMapping("/api/restriction")

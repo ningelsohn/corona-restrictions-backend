@@ -1,4 +1,4 @@
-package de.ningelgen.coronarestricitons.area;
+package de.ningelgen.coronarestricitons.district;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -9,6 +9,8 @@ import javax.persistence.Version;
 import javax.validation.constraints.NotNull;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+
+import de.ningelgen.coronarestricitons.area.AdministrativeArea;
 
 @Entity
 public class District {

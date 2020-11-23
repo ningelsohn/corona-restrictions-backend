@@ -1,4 +1,4 @@
-package de.ningelgen.coronarestricitons.area;
+package de.ningelgen.coronarestricitons.district;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
