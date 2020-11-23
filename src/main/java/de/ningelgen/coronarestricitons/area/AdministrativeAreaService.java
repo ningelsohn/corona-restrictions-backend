@@ -1,10 +1,10 @@
 package de.ningelgen.coronarestricitons.area;
 
-import de.ningelgen.coronarestricitons.user.AreaAdminUser;
+import de.ningelgen.coronarestricitons.user.User;
 
 public interface AdministrativeAreaService {
 
-    AdministrativeArea getArea(AreaAdminUser user);
+    AdministrativeArea getArea(User user);
 
 
     

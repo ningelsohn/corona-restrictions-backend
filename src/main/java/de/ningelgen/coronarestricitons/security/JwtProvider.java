@@ -23,7 +23,7 @@ public class JwtProvider {
     private int jwtExpirationInMs;
 
     public String generateToken(Authentication authentication) {
-        AreaAdminUserPrincipal areaUserPrincipal = (AreaAdminUserPrincipal) authentication.getPrincipal();
+        UserPrincipal areaUserPrincipal = (UserPrincipal) authentication.getPrincipal();
 
         Date now = new Date();
         Date expiryDate = new Date(now.getTime() + jwtExpirationInMs);

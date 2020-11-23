@@ -15,11 +15,8 @@ public class JwtAuthenticationEntryPoint implements AuthenticationEntryPoint {
      * Gets called whenever Exception is thrown due to unauthenticated user trying to access 
      */
 	@Override
-	public void commence(HttpServletRequest request, HttpServletResponse response,
-			AuthenticationException authException) throws IOException, ServletException {
-        // TODO Auto-generated method stub
+	public void commence(HttpServletRequest request, HttpServletResponse response, AuthenticationException authException) throws IOException, ServletException {
         response.sendError(HttpServletResponse.SC_UNAUTHORIZED, authException.getMessage());
-		
 	}
 
 }

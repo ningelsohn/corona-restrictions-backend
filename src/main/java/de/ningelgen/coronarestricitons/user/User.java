@@ -1,5 +1,9 @@
 package de.ningelgen.coronarestricitons.user;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
@@ -25,7 +29,7 @@ import de.ningelgen.coronarestricitons.area.AdministrativeArea;
     @UniqueConstraint(columnNames = {"username"}),
     @UniqueConstraint(columnNames = {"email"})
 })
-public class AreaAdminUser {
+public class User {
 
     @Id
     @GeneratedValue
@@ -55,8 +59,19 @@ public class AreaAdminUser {
     @JsonProperty(access = Access.WRITE_ONLY)
     private String password;
 
+    // TODO: might define enum for roles and permissions
+    private String roles;
+
+    private String permissions;
+
     @OneToOne
     private AdministrativeArea area;
+
+    public User(String username, String password, String email) {
+        this.username = username;
+        this.password = password;
+        this.email = email;
+    }
 
     // GETTERS AND SETTERS
 
@@ -100,6 +115,22 @@ public class AreaAdminUser {
         this.password = password;
     }
 
+    public List<String> getRoles(){
+        if (this.roles.length() > 0) {
+            return Arrays.asList(this.roles.split(","));
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    public List<String> getPermissions(){
+        if (this.permissions.length() > 0) {
+            return Arrays.asList(this.permissions.split(","));
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
     public AdministrativeArea getArea() {
         return area;
     }
@@ -127,7 +158,7 @@ public class AreaAdminUser {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        AreaAdminUser other = (AreaAdminUser) obj;
+        User other = (User) obj;
         if (id != other.id)
             return false;
         if (version != other.version)

@@ -3,7 +3,7 @@ package de.ningelgen.coronarestricitons.area;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import de.ningelgen.coronarestricitons.user.AreaAdminUser;
+import de.ningelgen.coronarestricitons.user.User;
 
 @Service
 public class AdministrativeAreaServiceImpl implements AdministrativeAreaService {
@@ -12,7 +12,7 @@ public class AdministrativeAreaServiceImpl implements AdministrativeAreaService 
     AdministrativeAreaDAO administrativeAreaDAO;
 
     @Override
-    public AdministrativeArea getArea(AreaAdminUser user) {
+    public AdministrativeArea getArea(User user) {
         return administrativeAreaDAO.findByAdmin(user);
     }
     

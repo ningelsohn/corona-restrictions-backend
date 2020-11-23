@@ -9,8 +9,8 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import de.ningelgen.coronarestricitons.user.AreaAdminUser;
-import de.ningelgen.coronarestricitons.user.AreaAdminUserDAO;
+import de.ningelgen.coronarestricitons.user.User;
+import de.ningelgen.coronarestricitons.user.UserDAO;
 
 @Service
 public class CustomUserDetailsService implements UserDetailsService {
@@ -22,33 +22,35 @@ public class CustomUserDetailsService implements UserDetailsService {
     // }
 
     @Autowired
-    private AreaAdminUserDAO adminUserDAO;
+    private UserDAO adminUserDAO;
 
     @Autowired
     PasswordEncoder pwenc;
 
     @Override
     @Transactional
-    public UserDetails loadUserByUsername(String loginname) throws UsernameNotFoundException {
-        AreaAdminUser user = adminUserDAO.findByLoginname(loginname);
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        User user = adminUserDAO.findByUsername(username);
 
         if (user == null) {
-            throw new UsernameNotFoundException(loginname);
+            throw new UsernameNotFoundException(username);
         }
+        
+        return UserPrincipal.create(user);
 
-        return org.springframework.security.core.userdetails.User
-        .withUsername(loginname)
-        .password(pwenc.encode(user.getPassword()))
-        .roles("USER")
-        .build();
+        // return org.springframework.security.core.userdetails.User
+        //     .withUsername(username)
+        //     .password(pwenc.encode(user.getPassword()))
+        //     .roles("USER")
+        //     .build();
     }
     
     @Transactional
     public UserDetails loadUserById(Long id) throws Exception {
-        AreaAdminUser areaUser = adminUserDAO.findById(id).orElseThrow(
+        User areaUser = adminUserDAO.findById(id).orElseThrow(
             () ->  new Exception("Resouce not Found") // new ResourceNotFoundException("User", "id", "id")
         );
 
-        return AreaAdminUserPrincipal.create(areaUser);
+        return UserPrincipal.create(areaUser);
     }
 }

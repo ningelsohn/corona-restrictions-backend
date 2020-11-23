@@ -13,7 +13,7 @@ import javax.persistence.Version;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import de.ningelgen.coronarestricitons.district.District;
-import de.ningelgen.coronarestricitons.user.AreaAdminUser;
+import de.ningelgen.coronarestricitons.user.User;
 
 @Entity
 public class AdministrativeArea {
@@ -28,7 +28,7 @@ public class AdministrativeArea {
     private int version;
 
     @OneToOne
-    private AreaAdminUser admin;
+    private User admin;
 
     @OneToMany(mappedBy = "area")
     @JsonIgnore
@@ -52,11 +52,11 @@ public class AdministrativeArea {
         this.version = version;
     }
 
-    public AreaAdminUser getAdmin() {
+    public User getAdmin() {
         return admin;
     }
 
-    public void setAdmin(AreaAdminUser admin) {
+    public void setAdmin(User admin) {
         this.admin = admin;
     }
 

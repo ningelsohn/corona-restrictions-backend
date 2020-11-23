@@ -1,15 +1,18 @@
 package de.ningelgen.coronarestricitons.security;
 
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.Objects;
-
+import java.util.stream.Collectors;
 
 import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import de.ningelgen.coronarestricitons.user.AreaAdminUser;
+import de.ningelgen.coronarestricitons.user.User;
 
-public class AreaAdminUserPrincipal implements UserDetails {
+public class UserPrincipal implements UserDetails {
 
     /**
      *
@@ -28,7 +31,7 @@ public class AreaAdminUserPrincipal implements UserDetails {
 
     // private Collection<? extends GrantedAuthority> authorities;
 
-    public AreaAdminUserPrincipal(Long id, String username, String email, String password /*, Collection<? extends GrantedAuthority> authorities */) {
+    public UserPrincipal(Long id, String username, String email, String password /*, Collection<? extends GrantedAuthority> authorities */) {
         this.id = id;
         this.username = username;
         this.email = email;
@@ -36,12 +39,14 @@ public class AreaAdminUserPrincipal implements UserDetails {
         // this.authorities = authorities;
     }
 
-    public static AreaAdminUserPrincipal create(AreaAdminUser areaUser) {
-        // List<GrantedAuthority> authorities = areaUser.getRoles().stream().map(role -> 
-        //     new SimpleGrantedAuthority(role.getName().name())
-        // ).collect(Collectors.toList());
+    public static UserPrincipal create(User areaUser) {
 
-        return new AreaAdminUserPrincipal(
+        List<GrantedAuthority> authorities = new ArrayList<>();
+
+        authorities.addAll(areaUser.getRoles().stream().map(role -> new SimpleGrantedAuthority("ROLE_" + role)).collect(Collectors.toList())); // Convention: Roles have prefix ROLE_
+        authorities.addAll(areaUser.getPermissions().stream().map(permission -> new SimpleGrantedAuthority(permission)).collect(Collectors.toList()));
+
+        return new UserPrincipal(
             areaUser.getId(), 
             areaUser.getUsername(), 
             areaUser.getEmail(), 
@@ -102,7 +107,7 @@ public class AreaAdminUserPrincipal implements UserDetails {
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        AreaAdminUserPrincipal that = (AreaAdminUserPrincipal) o;
+        UserPrincipal that = (UserPrincipal) o;
         return Objects.equals(id, that.id);
     }
 
