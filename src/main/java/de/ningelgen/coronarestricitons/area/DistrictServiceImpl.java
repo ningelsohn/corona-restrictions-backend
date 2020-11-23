@@ -1,5 +1,8 @@
 package de.ningelgen.coronarestricitons.area;
 
+import org.springframework.stereotype.Service;
+
+@Service
 public class DistrictServiceImpl implements DistrictService {
 
     @Override

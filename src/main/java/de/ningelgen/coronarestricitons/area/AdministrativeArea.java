@@ -3,6 +3,7 @@ package de.ningelgen.coronarestricitons.area;
 import java.util.LinkedList;
 import java.util.List;
 
+import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.OneToMany;
@@ -13,6 +14,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import de.ningelgen.coronarestricitons.user.AreaAdminUser;
 
+@Entity
 public class AdministrativeArea {
 
     @Id

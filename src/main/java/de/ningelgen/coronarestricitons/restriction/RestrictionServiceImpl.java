@@ -2,9 +2,12 @@ package de.ningelgen.coronarestricitons.restriction;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import de.ningelgen.coronarestricitons.area.AdministrativeArea;
 import de.ningelgen.coronarestricitons.area.District;
 
+@Service
 public class RestrictionServiceImpl implements RestrictionService {
 
     @Override
